@@ -13,3 +13,17 @@ npx tailwindcss init
 
 Layout 
 // nuxt data fetching (search)
+
+// pinia
+
+npm i pinia @pinia/nuxt
+
+
+=> package.json
+ "overrides": {
+    "vue": "latest"
+  }
+
+// nuxt config
+'@pinia/nuxt'
+

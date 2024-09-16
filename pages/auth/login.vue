@@ -1,23 +1,21 @@
 <script setup>
 import { ref, reactive } from "vue";
 
+const auth = useAuthStore();
 const form = reactive({
   email: '',
   password: '',
 });
 
 const errors = ref([]);
+const handleSubmit = async ()=>{
+         try {
+             await auth.login(form);
+            } catch (error) {
+             errors.value = error.data.errors;
+            }
+}
 
-const handleSubmit = async () => {
-  try {
-    const {data} = await $fetch("http://127.0.0.1:8000/api/login", {
-      method: "POST",
-      body: { ...form },
-    });
-  } catch (error) {
-   errors.value = error.data.errors;
-  }
-};
 </script>
 
 <template>
