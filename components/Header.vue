@@ -1,3 +1,11 @@
+
+
+<script setup>
+const token = useTokenStore();
+const auth = useAuthStore();
+ 
+</script>
+
 <template>
   
 <nav class="bg-gray-100 shadow-xl border-gray-200 dark:bg-gray-900">
@@ -24,8 +32,15 @@
         </li>
         
           <div class="flex justify-contet-center align-items-center mb-2">
-            <NuxtLink to="/auth/register" type="button" class="py-2.5 px-5 me-1 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-green-300 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Register</NuxtLink>
-            <NuxtLink to="/auth/login"  type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-green-300 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Login</NuxtLink>
+            <template v-if="!token.getStatus">
+              <NuxtLink to="/auth/register" type="button" class="py-2.5 px-5 me-1 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-green-300 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Register</NuxtLink>
+              <NuxtLink to="/auth/login"  type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-green-300 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Login</NuxtLink>
+            </template>
+            <template v-if="token.getStatus">
+              <button @click.prevent="auth.logout()" type="button" class="py-2.5 px-5 me-1 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-green-300 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Logout</button>
+              
+            </template>
+            
           </div>
           
 
@@ -37,9 +52,7 @@
 </nav>
 </template>
 
-<script setup>
- 
-</script>
+
 
 <style>
 

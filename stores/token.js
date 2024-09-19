@@ -1,17 +1,28 @@
 export const useTokenStore = defineStore('token', {
-    state: () => (
-          { token: null,
-             loggedIn: false 
-            }),
+  state: () => ({
+    token: null,
+    loggedIn: false,
+  }),
+  persist: true,
+  getters: {
+    getToken: (state) => state.token,
+    getStatus: (state) => state.loggedIn,
+  },
 
-    getters: {
-      doubleCount: (state) => state.count * 2,
+  actions: {
+    setToken(token) {
+      this.token = token;
+      this.loggedIn = true;
     },
-    
-    actions: {
-      setToken(token) {
-        this.token = token;
-        this.loggedIn = true;
-      },
+    removeToken(token) {
+      const auth = useAuthStore();
+      auth.$reset();
+      this.$reset();
+      return navigateTo("/auth/login");
+      
     },
-  })
+  },
+
+
+  
+})
