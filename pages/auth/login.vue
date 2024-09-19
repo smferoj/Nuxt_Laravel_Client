@@ -2,7 +2,11 @@
 import { ref, reactive } from "vue";
 
 const auth = useAuthStore();
+definePageMeta({
+  middleware:["guest"],
+});
 const token = useTokenStore();
+
 const form = reactive({
   email: '',
   password: '',

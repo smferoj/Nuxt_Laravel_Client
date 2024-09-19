@@ -1,12 +1,16 @@
+
+
+<script setup>
+definePageMeta({
+  middleware:['auth'],
+});
+</script>
+
 <template>
   <h1> This is Dashboard</h1>
 </template>
 
-<script>
-export default {
 
-}
-</script>
 
 <style>
 

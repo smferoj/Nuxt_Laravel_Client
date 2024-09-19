@@ -1,5 +1,9 @@
 <script setup>
 const auth = useAuthStore();
+
+definePageMeta({
+  middleware:["guest"],
+});
 const form = reactive({
   name: null,
   email: null,

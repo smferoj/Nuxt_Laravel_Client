@@ -26,15 +26,35 @@ export const useAuthStore = defineStore('auth', {
               throw error
             }
           },
+
+
          async register(formData){
-          
             try {
               const {data} = await $fetch("http://127.0.0.1:8000/api/register", {
                 method: "POST",
                 body: { ...formData },
               });
-              // console.log("auth_register_store", data);
               this.commonSetter(data);
+            } catch (error) {
+              throw error;
+            }
+          },
+
+         async logout(){
+          const tokenStore = useTokenStore();
+            try {
+              const res = await $fetch("http://127.0.0.1:8000/api/logout", {
+                method: "POST",
+                headers:{
+                  Accept:"application/json",
+                  Authorization: `Bearer ${tokenStore.getToken}`,
+                },
+              });
+              tokenStore.removeToken();
+             console.log(res);
+             return navigateTo("/dashboard");
+
+
             } catch (error) {
               throw error;
             }
