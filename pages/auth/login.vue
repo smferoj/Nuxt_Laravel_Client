@@ -2,6 +2,7 @@
 import { ref, reactive } from "vue";
 
 const auth = useAuthStore();
+const token = useTokenStore();
 const form = reactive({
   email: '',
   password: '',
@@ -19,9 +20,10 @@ const handleSubmit = async ()=>{
 </script>
 
 <template>
+ 
   <form @submit.prevent="handleSubmit" class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg dark:bg-gray-800">
     <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white text-center">Login</h2>
-    
+    <!-- {{ token.getToken }} -->
     <!-- Email input -->
     <div class="mb-2">
       <FormLabel for="email">Your Email</FormLabel>
@@ -43,7 +45,9 @@ const handleSubmit = async ()=>{
     </div> -->
 
     <ButtonSubmitButton>Login</ButtonSubmitButton>
+    <!-- <ButtonSubmitButton @click.prevent="token.removeToken()"> Remove Token</ButtonSubmitButton> -->
   </form>
+ 
 </template>
 
 <style scoped>
